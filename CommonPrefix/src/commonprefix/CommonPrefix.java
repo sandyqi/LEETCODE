@@ -37,10 +37,8 @@ public class CommonPrefix {
             }
             pre = pre.substring(0,len);
         }
-
-        
-        
-        return "";
+ 
+        return pre;
     }
     
 }
