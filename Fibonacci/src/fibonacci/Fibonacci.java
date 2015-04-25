@@ -19,7 +19,7 @@ public class Fibonacci {
     public static void main(String[] args) {
         // TODO code application logic here
       //  System.out.println("Bad: "+badSolution(45));
-        System.out.println("Good: "+goodSolution(45));
+        System.out.println("Good: "+goodSolution(3));
     }
     
     public static int badSolution(int num){
@@ -49,7 +49,7 @@ public class Fibonacci {
            return 2;
        }
        int fn1 = 2, fn2 = 3, fnext = 0;
-       for(int i = 3; i<num; i++){
+       for(int i = 3; i<=num; i++){
            fnext = fn1+fn2;
            fn1 = fn2;
            fn2 = fnext;
