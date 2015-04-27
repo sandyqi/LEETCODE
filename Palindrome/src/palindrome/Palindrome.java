@@ -20,9 +20,12 @@ public class Palindrome {
     public static void main(String[] args) {
         // TODO code application logic here
         String s = ",; W;:GlG:;l ;,";
+        String s2="#4f3.4.3f4#";
         boolean b = isPalindrome(s);
         boolean c = isPalindrome("ca4ac");
-        System.out.println(b+" "+c);
+        Practice426 p = new Practice426();
+        boolean pp = p.isPalindrome(s2);
+        System.out.println(pp);
     }
     
     public static boolean isPalindrome(String s) {
@@ -93,6 +96,21 @@ public class Palindrome {
                 return false; //compare one pair
             }
         }
+        return true;
+    }
+}
+
+class Practice426{
+    public static boolean isPalindrome(String s){
+        char[] ch = s.toCharArray();
+        int i = 0; int j = ch.length-1;
+        while(i<j){
+            if(ch[i]!=ch[j]){ System.out.println("i is "+ch[i]+"   j is "+ch[j]);return false;}
+            
+            i++; j--;
+        }
+        
+        
         return true;
     }
 }

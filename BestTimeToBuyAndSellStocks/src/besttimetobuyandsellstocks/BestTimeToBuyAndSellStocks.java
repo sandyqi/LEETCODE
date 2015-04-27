@@ -162,48 +162,7 @@ public class BestTimeToBuyAndSellStocks {
         }
         return release2; ///Since release1 is initiated as 0, so release2 will always higher than release1.
     }
-/*
-    public int maxProfitTwoTransaction2(int[] prices) {
 
-        if (prices == null || prices.length == 0) {
-            return 0;
-        }
-        int lenght = prices.length;
-
-        int[] leftProfit = new int[lenght];
-        int leftMaxProfit = 0;
-        int leftMin = prices[0];
-        for (int i = 0; i < lenght; i++) {
-            if (prices[i] < leftMin) {
-                leftMin = prices[i];
-            }
-            if (prices[i] - leftMin > leftMaxProfit) {
-                leftMaxProfit = prices[i] - leftMin;
-            }
-            leftProfit[i] = leftMaxProfit;
-        }
-
-        int maxProfit = 0;
-        int rightMaxProfit = 0;
-        int rightMax = prices[lenght - 1];
-        for (int i = lenght - 1; i >= 0; i--) {
-            if (prices[i] > rightMax) {
-                rightMax = prices[i];
-            }
-            if (rightMax - prices[i] > rightMaxProfit) {
-                rightMaxProfit = rightMax - prices[i];
-            }
-            int currentProfit = rightMaxProfit + (i > 0 ? leftProfit[i - 1] : 0);
-            if (currentProfit > maxProfit) {
-                maxProfit = currentProfit;
-            }
-        }
-
-        return maxProfit;
-
-    }
-    
-    */
     
        public int maxProfitTwoTransaction2(int[] prices) {
        // traverses. one from left to right. one from right to left. 
@@ -258,6 +217,72 @@ public class BestTimeToBuyAndSellStocks {
            
            return profit;
        }
+    
+    
+}
+
+
+class Practice426{
+    
+    public int maxProfit(int[] prices){
+        if(prices==null ||prices.length == 1) return 0;
+        
+        int maxProfit = 0; int currentProfit = 0;
+        int maxPrice = prices[prices.length-1];
+        
+        int index = prices.length -2;
+        
+        while(index>=0){
+            if(prices[index]>maxPrice) maxPrice = prices[index];
+            
+            currentProfit = maxPrice - prices[index];
+            
+            if(currentProfit>maxProfit) maxProfit = currentProfit;
+            
+            index--;
+        }
+        
+        
+        
+        
+        return maxProfit;
+        
+        
+    }
+    
+    
+    
+}
+
+
+//Say you have an array for which the ith element is the price of a given stock on day i.
+
+//Design an algorithm to find the maximum profit. You may complete at most k transactions.
+
+class BestTime4{
+    public int maxProfit(int k, int[] prices) {
+        int len = prices.length;
+        if (k >= len / 2) return quickSolve(prices);
+
+        int[][] t = new int[k + 1][len];
+        for (int i = 1; i <= k; i++) {
+            int tmpMax =  -prices[0];
+            for (int j = 1; j < len; j++) {
+                t[i][j] = Math.max(t[i][j - 1], prices[j] + tmpMax);
+                tmpMax =  Math.max(tmpMax, t[i - 1][j - 1] - prices[j]);
+            }
+        }
+        return t[k][len - 1];
+    }
+
+
+    private int quickSolve(int[] prices) {
+        int len = prices.length, profit = 0;
+        for (int i = 1; i < len; i++)
+            // as long as there is a price gap, we gain a profit.
+            if (prices[i] > prices[i - 1]) profit += prices[i] - prices[i - 1];
+        return profit;
+    }
     
     
 }
