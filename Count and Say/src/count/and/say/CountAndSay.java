@@ -9,6 +9,16 @@ package count.and.say;
 /**
  *
  * @author Meng
+ * 
+ * The count-and-say sequence is the sequence of integers beginning as follows:
+1, 11, 21, 1211, 111221, ...
+
+1 is read off as "one 1" or 11.
+11 is read off as "two 1s" or 21.
+21 is read off as "one 2, then one 1" or 1211.
+Given an integer n, generate the nth sequence.
+
+Note: The sequence of integers will be represented as a string.
  */
 public class CountAndSay {
 
@@ -78,21 +88,45 @@ public class CountAndSay {
        }
        return sb.toString();
     }
-   /* 
-    public static String translate2(int num){
-        int begin = 1;
-        if(num == 1){
-            return "1";
-        }
-        StringBuilder sb = new StringBuilder();
-        int length = chars.length;
-        
-        for(int i = 0; i<length; i++){
-            int count = 0;
-            
-        }
-        
+ 
+    
+}
+
+
+class Solution427{
+    
+    public String countAndSay(int n) {
+    if (n == 1) {
+        return "1";
     }
-    */
+    String str = "1", result = "";
+    int counter = 0, current = 0, prev = 0;
+    char[] chars;
+    for (int i = 2; i <= n; i++) {
+        chars = str.toCharArray();
+        result = "";
+        counter = 0;
+        current = 0; 
+        prev = 0;
+        for (int j = 0; j < chars.length; j++){
+            current = (int)(chars[j] - '0');
+            if (current == prev) {
+                counter++;
+            } else if (current != prev && counter != 0) {
+                result += counter + "" + prev;
+                prev = current;
+                counter = 1;
+            } else {
+                prev = current;
+                counter++;
+            }
+        }
+        result += counter + "" + current;
+        str = result;
+    }
+
+    return str;
+}
+    
     
 }
